@@ -1,0 +1,19 @@
+services: 
+  gameUpdate:
+    image: cm2network/steamcmd
+    command: ./steamcmd.sh +force_install_dir /stationeers/gameServer +login anonymous +app_update 600760 validate +quit
+    volumes:
+      - ./data:/stationeers
+  stationeers: 
+    image: archlinux
+    environment:
+      TZ: America/Los_Angeles
+    entrypoint: /stationeers/runstationeers-linux.sh
+    ports:
+      - 27016:27016/tcp
+      - 27020:27016/udp
+    volumes:
+      - ./data:/stationeers 
+    depends_on:
+      gameUpdate:
+        condition: service_completed_successfully
