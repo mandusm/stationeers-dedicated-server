@@ -29,6 +29,8 @@ SETTINGS_PATH="$DATA_DIR/settings.xml"
 DIFFICULTY="easy"
 LOCAL_IP_ADDRESS="0.0.0.0"
 
+touch $LOG_FILE
+
 # Run the server
 "$EXECUTABLE" \
 -nographics \
